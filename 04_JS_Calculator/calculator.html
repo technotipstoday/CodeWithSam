@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Calculator</title>
+    <style>
+        /* Styling for calculator */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            width: 300px;
+            padding: 30px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 40px 40px rgba(0, 0, 0, 5);
+            background-color: #f59494;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            /* default font size 16px */
+            font-size: 32px;
+        }
+
+        input[type="text"] {
+            grid-column: 1 / span 4;
+            height: 40px;
+            text-align: right;
+            padding: 10px;
+            font-size: 1.5em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            /* top | right | bottom | left */
+            /*
+            padding-top: 15px;
+            padding-right: 0px;
+            padding-bottom: 15px;
+            padding-left: 0px;
+            */
+            padding: 15px 0;
+            /* em based on parent's font-size*/
+            font-size: 1.2em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #d0d0d0;
+        }
+
+        /* Clear and Equals buttons */
+        input[value="C"] {
+            grid-column: 1 / span 2;
+            background-color: #ff6666;
+            color: white;
+        }
+
+        input[value="="] {
+            grid-column: 3 / span 2;
+            background-color: #66cc66;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <!-- Calculator buttons -->
+        <input type="button" value="7" onclick="addToDisplay('7')">
+        <input type="button" value="8" onclick="addToDisplay('8')">
+        <input type="button" value="9" onclick="addToDisplay('9')">
+        <input type="button" value="/" onclick="addToDisplay('/')">
+        <input type="button" value="4" onclick="addToDisplay('4')">
+        <input type="button" value="5" onclick="addToDisplay('5')">
+        <input type="button" value="6" onclick="addToDisplay('6')">
+        <input type="button" value="*" onclick="addToDisplay('*')">
+        <input type="button" value="1" onclick="addToDisplay('1')">
+        <input type="button" value="2" onclick="addToDisplay('2')">
+        <input type="button" value="3" onclick="addToDisplay('3')">
+        <input type="button" value="-" onclick="addToDisplay('-')">
+        <input type="button" value="C" onclick="clearDisplay()">
+        <input type="button" value="0" onclick="addToDisplay('0')">
+        <input type="button" value="+" onclick="addToDisplay('+')">
+        <input type="button" value="=" onclick="calculate()">
+    </div>
+
+    <script>
+        // Function to add input to display
+        function addToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        // Function to clear display
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        // Function to calculate result
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value); // Using eval for simplicity (not recommended for production)
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+
+</html>
